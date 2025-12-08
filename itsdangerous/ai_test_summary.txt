@@ -1,0 +1,167 @@
+================================ AI TESTS SUMMARY ================================
+
+Project: itsdangerous
+Test Framework: pytest
+Total Tests: 349
+Status: 340 PASSED, 9 FAILED (97% success rate)
+
+================================ COVERAGE REPORT =================================
+
+Name                             Stmts   Miss Branch BrPart  Cover
+------------------------------------------------------------------
+src/itsdangerous/__init__.py        20      0      0      0   100%
+src/itsdangerous/_compat.py         22      2      6      1    89%
+src/itsdangerous/_json.py           13      0      0      0   100%
+src/itsdangerous/encoding.py        27      0      2      0   100%
+src/itsdangerous/exc.py             31      3      2      1    88%
+src/itsdangerous/jws.py            120      9     28      3    92%
+src/itsdangerous/serializer.py      67      1     14      2    96%
+src/itsdangerous/signer.py          85      2     22      1    97%
+src/itsdangerous/timed.py           70      2     16      2    95%
+src/itsdangerous/url_safe.py        37      2      8      0    96%
+------------------------------------------------------------------
+TOTAL                              492     21     98     10    95%
+
+================================ TEST BREAKDOWN ==================================
+
+Test Files:
+  - test_compat.py        : 28 tests (8%)
+  - test_encoding.py      : 47 tests (13%) - 1 FAILED
+  - test_exc.py           : 32 tests (9%) - NEW MODULE!
+  - test_jws.py           : 71 tests (20%) - 6 FAILED
+  - test_serializer.py    : 53 tests (15%)
+  - test_signer.py        : 52 tests (15%)
+  - test_timed.py         : 47 tests (13%) - 1 FAILED
+  - test_url_safe.py      : 56 tests (16%)
+  - conftest.py           : Test fixtures and utilities
+  - README.md             : Comprehensive test documentation
+
+================================ FAILED TESTS ====================================
+
+1. test_encoding.py::test_decode_invalid_base64_raises_error
+   Issue: Base64 validation error expectations
+
+2. test_jws.py::test_dumps_creates_jws_format
+   Issue: Incorrect JWS format assumption
+
+3. test_jws.py::test_loads_invalid_signature_raises
+   Issue: Signature validation behavior mismatch
+
+4. test_jws.py::test_loads_algorithm_mismatch_raises
+   Issue: Algorithm handling differs from expectations
+
+5. test_jws.py::test_loads_unsafe_invalid_signature
+   Issue: Unsafe load behavior incorrect
+
+6. test_jws.py::test_algorithm_none_creates_empty_signature
+   Issue: None algorithm behavior not as expected
+
+7. test_jws.py::test_compact_json_serialization
+   Issue: JSON serialization format wrong
+
+8. test_jws.py::test_loads_at_exact_expiry
+   Issue: Expiry boundary condition handling
+
+9. test_timed.py::test_different_timestamps_different_signatures
+   Issue: Timestamp resolution too low (time.sleep insufficient)
+
+================================ ROOT CAUSES =====================================
+
+Primary Issues:
+1. JWS Format Misunderstanding (6 tests)
+   - AI assumed format based on code analysis
+   - Real format differs from assumptions
+   - Need to study actual JWS output
+
+2. Timing Naivety (1 test)
+   - Used time.sleep(0.01) instead of freezegun
+   - Timestamp resolution insufficient
+   - Need proper time mocking
+
+3. Validation Behavior (2 tests)
+   - Expected errors don't match reality
+   - Edge case handling differs
+
+================================ TEST QUALITY FEATURES ===========================
+
+✓ Comprehensive Given/When/Then documentation
+✓ Descriptive test names
+✓ Well-organized in 10 files
+✓ Dedicated exception module (test_exc.py)
+✓ Extensive use of parametrization
+✓ Proper fixtures in conftest.py
+✓ Detailed README.md
+
+✗ 9 failing tests (3% failure rate)
+✗ Lower coverage than manual (95% vs 99%)
+✗ Some incorrect behavioral assumptions
+✗ Needs execution validation
+
+================================ MISSING COVERAGE ================================
+
+Modules with Reduced Coverage (vs Manual):
+- jws.py:        92% (manual: 100%) - Missing 9 statements
+- serializer.py: 96% (manual: 100%) - Missing 1 statement
+- signer.py:     97% (manual: 100%) - Missing 2 statements
+- timed.py:      95% (manual: 100%) - Missing 2 statements
+- url_safe.py:   96% (manual: 100%) - Missing 2 statements
+
+Total Gap: 21 statements not covered (vs 5 in manual tests)
+
+================================ COMPARISON WITH MANUAL ===========================
+
+Manual Tests: 388 tests, 99% coverage, 100% pass rate
+AI Tests:     349 tests, 95% coverage, 97% pass rate
+
+Manual is SUPERIOR:
+  ✓ Higher coverage (+4%)
+  ✓ Perfect reliability (0 failures vs 9)
+  ✓ Better test efficiency
+  ✓ Correct behavioral understanding
+  ✓ Production-ready
+
+AI Advantages:
+  ✓ Better organization
+  ✓ Superior documentation
+  ✓ Dedicated exception tests
+  ✓ More systematic approach
+
+================================ RECOMMENDATIONS =================================
+
+Production Use:
+  ❌ NOT READY - Use manual tests instead
+  ❌ 3% failure rate unacceptable
+  ❌ Lower coverage than manual
+  ⚠️  Needs significant fixes before use
+
+For Improvement:
+  1. Fix 9 failing tests by studying manual tests
+  2. Replace time.sleep() with freezegun
+  3. Validate JWS format assumptions
+  4. Align error expectations with reality
+  5. Re-run and iterate until 100% pass
+
+For Learning:
+  ✓ Study organization patterns
+  ✓ Adopt documentation style
+  ✓ Use parametrization ideas
+  ✓ Extract exc.py tests after fixing
+
+================================ OVERALL ASSESSMENT ==================================
+
+Coverage:       95% (GOOD but not excellent)
+Reliability:    97% pass rate (NEEDS IMPROVEMENT)
+Organization:   EXCELLENT (10 files, good structure)
+Documentation:  EXCELLENT (README, docstrings)
+Production Ready: NO (use manual tests)
+
+Conclusion: Well-structured tests with excellent documentation, but fundamental
+behavioral misunderstandings prevent production use. Manual tests remain superior
+for itsdangerous. AI tests serve as inspiration for organization and documentation,
+not as replacement.
+
+Key Lesson: Test generation without execution validation produces plausible but
+incorrect tests. Complex libraries with timing sensitivity and specific formats
+require manual test refinement.
+
+Status: GOOD EFFORT, NEEDS FIXES (use as reference only)
