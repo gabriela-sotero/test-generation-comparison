@@ -16,7 +16,7 @@ Este diretório contém uma análise comparativa entre testes gerados por IA e t
 
 ```
 python-decouple/
-├── code/                      # Código original com testes manuais
+├── code/                      # Código original (submódulo git)
 │   ├── decouple.py           # Código-fonte
 │   ├── tests/                # Testes manuais originais (67 tests)
 │   └── tests-ai/             # Testes AI (207 tests)
@@ -31,6 +31,8 @@ python-decouple/
 ├── comparison_analysis.txt   # Análise comparativa completa
 └── README.md                 # Este arquivo
 ```
+
+**Nota:** A pasta `code/` é um submódulo git contendo o repositório completo do python-decouple.
 
 ## 🎯 Principais Descobertas
 
@@ -155,6 +157,7 @@ pytest tests-ai/ -v --cov=decouple --cov-report=html
 
 ### Comparar Ambos
 ```bash
+cd code
 # Manual
 pytest tests/ --cov=decouple --cov-report=json:manual_cov.json
 
@@ -177,3 +180,23 @@ pytest tests-ai/ --cov=decouple --cov-report=json:ai_cov.json
 - `ai_test_summary.txt` - Resumo dos testes AI
 - `ai_coverage.html` / `manual_coverage.html` - Relatórios visuais
 - `ai_coverage.json` / `manual_coverage.json` - Dados de cobertura
+
+---
+
+**Comparação com itsdangerous:**
+
+| Aspecto | python-decouple | itsdangerous |
+|---------|-----------------|--------------|
+| Cobertura | AI=Manual (97%) | Manual>AI (99%>95%) |
+| Aprovação | AI=Manual (100%) | Manual>AI (100%>97%) |
+| Vencedor | **Empate** | Manual |
+| Complexidade | Simples | Complexa |
+| AI Viável? | **Sim** | Com ressalvas |
+
+**Conclusão:** Para bibliotecas simples como python-decouple, testes AI podem alcançar mesma cobertura que testes manuais. Para bibliotecas complexas como itsdangerous, testes manuais são superiores.
+
+---
+
+**Gerado por**: Claude (Anthropic)
+**Data**: Dezembro 2024
+**Projeto**: python-decouple test comparison
