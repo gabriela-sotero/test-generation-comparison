@@ -1,0 +1,18 @@
+{
+  "tests-ai/test_jws.py::TestJSONWebSignatureSerializer": true,
+  "tests-ai/test_jws.py::TestTimedJSONWebSignatureSerializer": true,
+  "tests-ai/test_timed.py::TestTimestampSigner": true,
+  "tests-ai/test_timed.py::TestTimedSerializer": true,
+  "tests-ai/test_url_safe.py::TestURLSafeSerializerMixin": true,
+  "tests-ai/test_url_safe.py::TestURLSafeSerializer": true,
+  "tests-ai/test_url_safe.py::TestURLSafeTimedSerializer": true,
+  "tests-ai/test_encoding.py::TestBase64Decode::test_decode_invalid_base64_raises_error": true,
+  "tests-ai/test_jws.py::TestJSONWebSignatureSerializer::test_dumps_creates_jws_format": true,
+  "tests-ai/test_jws.py::TestJSONWebSignatureSerializer::test_loads_invalid_signature_raises": true,
+  "tests-ai/test_jws.py::TestJSONWebSignatureSerializer::test_loads_algorithm_mismatch_raises": true,
+  "tests-ai/test_jws.py::TestJSONWebSignatureSerializer::test_loads_unsafe_invalid_signature": true,
+  "tests-ai/test_jws.py::TestJSONWebSignatureSerializer::test_algorithm_none_creates_empty_signature": true,
+  "tests-ai/test_jws.py::TestJSONWebSignatureSerializer::test_compact_json_serialization": true,
+  "tests-ai/test_jws.py::TestTimedJSONWebSignatureSerializer::test_loads_at_exact_expiry": true,
+  "tests-ai/test_timed.py::TestTimestampSigner::test_different_timestamps_different_signatures": true
+}
