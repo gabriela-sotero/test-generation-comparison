@@ -229,8 +229,3 @@ test-generation-comparison/
 - Cobertura média: **97%**
 - Taxa de aprovação média: **99.1%**
 
----
-
-**Gerado por:** Claude (Anthropic)
-**Data:** Dezembro 2024
-**Conclusão:** Testes AI são viáveis para bibliotecas simples, mas bibliotecas complexas ainda requerem expertise manual.
