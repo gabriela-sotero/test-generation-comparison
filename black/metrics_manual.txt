@@ -1,0 +1,13 @@
+Manual Tests Metrics – Black
+
+Total tests           : 421
+Code coverage         : 91%
+Lines of test code    : 21,126
+Number of test files  : 251
+Pass rate             : 100%
+
+Test source:
+- Black official repository
+
+Command used:
+pytest tests/ --cov=black

@@ -1,0 +1,11 @@
+Comparison Analysis – Black
+
+Manual tests exhibit significantly higher coverage and better
+organization, reflecting deep understanding of Black's formatting rules.
+
+AI-generated tests are concise and faster to produce but lack
+integration scenarios and fail to cover complex formatting behavior.
+
+Conclusion:
+AI-generated tests are currently insufficient as a standalone strategy
+for complex developer tools like Black.

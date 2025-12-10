@@ -1,0 +1,13 @@
+AI-generated Tests Metrics – Black
+
+Total tests           : 41
+Code coverage         : 41%
+Lines of test code    : 535
+Number of test files  : 1
+Pass rate             : 95%
+
+Test source:
+- AI-generated test suite
+
+Command used:
+pytest test_black_new.py --cov=black
