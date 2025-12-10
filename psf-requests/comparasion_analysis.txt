@@ -1,0 +1,252 @@
+=============================== COMPARATIVE ANALYSIS ================================
+
+Project: requests (2019 snapshot)
+Comparison: AI-Generated Tests vs Manual Tests
+
+=============================== SUMMARY STATISTICS ==================================
+
+┌─────────────────────────┬──────────────┬──────────────┬────────────────────┐
+│ Metric                  │ Manual Tests │ AI Tests     │ Difference          │
+├─────────────────────────┼──────────────┼──────────────┼────────────────────┤
+│ Total Tests             │ 559          │ 72           │ -487 (-87%)         │
+│ Tests Passed            │ 559 (100%)   │ 72 (100%)*   │ 0                   │
+│ Tests Failed            │ 0            │ 0 (after fix)│ 0                   │
+│ Code Coverage           │ 25%          │ 45%          │ +20%                │
+│ Lines of Test Code      │ ~6,200       │ ~1,900       │ -4,300              │
+│ Test Files              │ 1 directory  │ 15 files     │ +15                 │
+│ Statements Covered      │ ~520/2096    │ 937/2096     │ +417                │
+│ Branches Covered        │ Very low     │ Moderate     │ +significant        │
+└─────────────────────────┴──────────────┴──────────────┴────────────────────┘
+
+* Observação: 1 teste da IA falhou inicialmente por pressupor comportamento incorreto (persistência automática de cookies). Após correção semântica, todos passaram.
+
+=============================== DETAILED BREAKDOWN ==================================
+
+Manual Tests Structure (559 tests):
+
+Os testes manuais do Requests são altamente focados em integração real, não em cobertura estrutural.
+
+Principais características:
+* testam fluxo HTTP completo
+* simulam conexões reais
+* validam regressões históricas
+* focam em adapters, sessions e models
+* muita profundidade, pouca abrangência
+
+Estimativa de distribuição (com base no relatório de 2019):
+
+test_requests.py               : ~300 tests (54%)
+test_sessions.py               : ~140 tests (25%)
+test_models.py                 : ~70 tests  (13%)
+test_utils.py                  : ~30 tests   (5%)
+outros                         : ~19 tests   (3%)
+
+---
+
+AI Tests Structure (72 tests):
+
+A IA produziu uma suíte unitária, não integrativa, e muito mais distribuída:
+
+test_api.py                    : ~10 tests   (14%)
+test_models.py                 : ~10 tests   (14%)
+test_sessions.py               : ~8 tests    (11%)
+test_cookies.py                : ~7 tests    (10%)
+test_utils.py                  : ~8 tests    (11%)
+test_auth.py                   : ~5 tests     (7%)
+test_structures.py             : ~5 tests     (7%)
+test_hooks.py                  : ~4 tests     (5%)
+test_adapters.py               : ~5 tests     (7%)
+test_exceptions.py             : ~3 tests     (4%)
+test_status_codes.py           : ~4 tests     (5%)
+test_compat.py                 : ~3 tests     (4%)
+test_internal_utils.py         : ~5 tests     (7%)
+test_help.py                   : ~2 tests     (3%)
+test_integration.py            : 1 test       (1%)
+
+A IA produziu 15 arquivos organizados modularmente, em contraste com a estrutura manual gigante.
+
+=============================== COVERAGE COMPARISON ==================================
+
+Module-by-Module Coverage:
+
+┌──────────────────────────┬─────────────┬─────────────┬────────────┐
+│ Module                   │ Manual      │ AI          │ Difference │
+├──────────────────────────┼─────────────┼─────────────┼────────────┤
+│ __init__.py              │ ~10%        │ 76%         │ +66%       │
+│ __version__.py           │ ~0%         │ 100%        │ +100%      │
+│ _internal_utils.py       │ ~5%         │ 93%         │ +88%       │
+│ adapters.py              │ ~20%        │ 33%         │ +13%       │
+│ api.py                   │ ~15%        │ 43%         │ +28%       │
+│ auth.py                  │ ~10%        │ 25%         │ +15%       │
+│ certs.py                 │ ~0%         │ 67%         │ +67%       │
+│ compat.py                │ ~0%         │ 65%         │ +65%       │
+│ cookies.py               │ ~15%        │ 52%         │ +37%       │
+│ exceptions.py            │ ~0%         │ 100%        │ +100%      │
+│ help.py                  │ ~0%         │ 0%          │ 0%         │
+│ hooks.py                 │ ~5%         │ 57%         │ +52%       │
+│ models.py                │ ~30%        │ 52%         │ +22%       │
+│ packages.py              │ ~0%         │ 100%        │ +100%      │
+│ sessions.py              │ ~25%        │ 51%         │ +26%       │
+│ status_codes.py          │ ~20%        │ 100%        │ +80%       │
+│ structures.py            │ ~10%        │ 77%         │ +67%       │
+│ utils.py                 │ ~10%        │ 29%         │ +19%       │
+├──────────────────────────┼─────────────┼─────────────┼────────────┤
+│ TOTAL                    │ 25%         │ 45%         │ +20%       │
+└──────────────────────────┴─────────────┴─────────────┴────────────┘
+
+=============================== FAILED AI TESTS ==================================
+
+Apenas 1 teste falhou na geração IA original:
+
+test_integration.py::test_session_persists_cookies_across_requests
+- IA assumiu que Session insere cookies automaticamente em PreparedRequest.
+- Esse comportamento NÃO existe no Requests 2.22.
+- Após ajuste para refletir o comportamento real, o teste passou.
+
+Causa:
+IA inventou comportamento não suportado pelo Requests.
+
+=============================== QUALITATIVE COMPARISON ==================================
+
+Manual Tests Characteristics:
+
+✓ 100% passing  
+✓ Focados em integração real  
+✓ Alta profundidade  
+✓ Capturam bugs históricos  
+✓ Testam comportamento real, não só estrutura  
+
+✗ Baixa cobertura (25%)  
+✗ Pouco teste unitário  
+✗ Muito custoso de manter  
+
+---
+
+AI Tests Characteristics:
+
+✓ Melhor distribuição modular  
+✓ 15 arquivos — excelente organização  
+✓ 45% de cobertura (20% maior que manual)  
+✓ Testa módulos esquecidos pelo manual  
+✓ Estrutura clara, padronizada e documentada  
+
+✗ Entendimento superficial da API  
+✗ Falha em comportamento real (cookies)  
+✗ Zero testes integrados reais  
+✗ Não conhece histórico da biblioteca  
+
+=============================== TEST QUALITY ANALYSIS ==================================
+
+Manual Tests — Strengths:
+* 100% aprovação
+* Altíssima precisão semântica
+* Focados em casos reais
+* Confiáveis e maduros
+* Testam fluxos complexos (adapters, sessions)
+
+Manual Tests — Weaknesses:
+* Baixa cobertura estrutural
+* Pouco detalhamento modular
+* Suíte gigantesca e difícil de manter
+
+---
+
+AI Tests — Strengths:
+* Boa cobertura estrutural
+* Módulos completos (exceptions, compat, structures)
+* Organização impecável
+* Testes curtos, diretos e legíveis
+* Suite extensível
+
+AI Tests — Weaknesses:
+* Falta de entendimento profundo
+* Apenas um teste integrativo
+* Sujeita a “alucinações semânticas”
+* Não replica casos reais de rede
+
+=============================== UNIQUE TEST COVERAGE ==================================
+
+ONLY Manual Tests Cover:
+* Fluxos de rede real
+* Adapters + HTTP pipeline completo
+* Cookies reais
+* Sessões persistentes
+* Regressões históricas
+* Comportamento profundo da API
+* Edge cases baseados em bugs reais
+
+ONLY AI Tests Cover:
+* Exceptions (100%)
+* Compatibilidade Python (compat.py)
+* Estruturas internas como CaseInsensitiveDict
+* status_codes.py completo
+* helpers internos nunca testados antes
+
+=============================== ROOT CAUSE ANALYSIS ==================================
+
+Por que a IA teve MAIS cobertura com MENOS testes?
+
+1. Manual testa profundidade, IA testa superfície ampla
+2. Manual ignora módulos irrelevantes, IA tenta testar tudo
+3. IA cobre funções pequenas que somam linhas (status_codes, exceptions)
+4. Manual foca no comportamento real; IA foca em assinatura de função
+5. Requests é enorme — IA ganha cobertura “fácil”
+
+=============================== TESTING APPROACHES ==================================
+
+Manual Tests:
+* Behavior-driven
+* Alta fidelidade
+* Capturam nuances da API
+* Prioridade: confiabilidade
+
+AI Tests:
+* Code-driven
+* Baseados na estrutura do código
+* Testes unitários amplos
+* Prioridade: cobertura
+
+=============================== STRENGTHS & WEAKNESSES ==================================
+
+Manual Tests — Overall: EXCELLENT
+* Altamente confiáveis
+* Precisão máxima
+* Capturam comportamento real
+* Robustez incomparável
+
+AI Tests — Overall: GOOD
+* Ótima estrutura
+* Boa cobertura
+* Fácil de manter
+* Superficiais
+* Falhas semânticas
+* Não substituem o manual
+
+=============================== RECOMMENDATIONS ==================================
+
+Para Requests:
+1. Mantenha suite manual como base
+2. Aproveite edge cases da AI para complementar
+3. Adote documentação AI em partes do manual
+4. Não substituir o manual — mas sim expandir com IA
+
+Híbrido Ideal:
+* 559 testes manuais (núcleo)
+* +30–50 testes IA (comportamento adicional real)
+
+Cobertura alvo: 55–60% confiável, com precisão semântica.
+
+=============================== CONCLUSION ==================================
+
+Coverage Winner: AI (45% vs 25%)  
+Reliability Winner: Manual (100% vs 100% only after fix)  
+Organization Winner: AI (15 files vs 1 suite gigante)  
+Semantic Precision: Manual vence com folga  
+Production-Ready:  
+* Manual → Pronto  
+* AI → Precisa ajustes  
+
+Final Assessment for Requests:  
+A IA aumenta cobertura estrutural, mas não entende o comportamento interno.  
+A suíte manual, apesar de menos abrangente, é muito mais precisa e confiável.  
+A combinação das duas é a estratégia superior.
